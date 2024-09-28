@@ -1,0 +1,207 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  
+  /* Header styling */
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  
+  header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  header nav ul li {
+    display: inline;
+  }
+  
+  header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+  
+  header nav ul li a:hover {
+    background-color: #555;
+  }
+  
+  /* Footer styling */
+  footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  
+  footer ul li {
+    margin: 0 15px;
+  }
+  
+  footer ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  footer ul li a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Main section styling (for large image) */
+  .main-section {
+    background-image: url('https://via.placeholder.com/1500x500'); /* Placeholder image */
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .main-section h1 {
+    font-size: 3em;
+  }
+  
+  .main-section button {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+  }
+  
+  .main-section button:hover {
+    background-color: #e65c00;
+  }
+  
+  /* Event section */
+  .events-section {
+    padding: 20px;
+  }
+  
+  .event-card {
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 20px;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .event-card h3 {
+    margin: 0;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  /* Additional styling for the Event Card template */
+  .event-ticket {
+    background-color: #222;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .event-ticket .event-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .event-ticket .event-details {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .event-ticket .event-details div {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .event-ticket .event-pricing {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  .event-pricing p {
+    margin: 5px 0;
+  }
+  
+  .details-button {
+    margin-top: 10px;
+    background-color: #ff6600;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .details-button:hover {
+    background-color: #e65c00;
+  }
+  
+  /* Event Filter Styling */
+.event-filter {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    margin: 0 10px;
+  }
+  
+  .filter-group label {
+    margin-bottom: 5px;
+  }
+  
+  .filter-group input,
+  .filter-group select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .filter-group input[type='range'] {
+    width: 100px;
+  }
+  
+  /* Price Range Slider */
+.price-slider {
+    width: 300px;
+    margin: 20px auto;
+  }
