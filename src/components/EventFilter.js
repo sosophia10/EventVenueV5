@@ -26,9 +26,44 @@ function EventFilter({ onFilterChange }) {
     onFilterChange(filters);
   };
 
+    // Function to trigger filtering when the Search button is clicked
+    const handleSearchClick = () => {
+      const filters = {
+        search,
+        category,
+        minDate,
+        maxDate,
+        minTime,
+        maxTime,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
+      };
+      onFilterChange(filters); // Pass the filters up to the parent component
+    };
+
+    // Function to reset all filters to their default values when Clear button is clicked
+    const handleClearFilters = () => {
+      setSearch('');
+      setCategory('');
+      setMinDate('');
+      setMaxDate('');
+      setMinTime('');
+      setMaxTime('');
+      setPriceRange([0, 500]);
+      onFilterChange({ // Send empty or default filters to parent
+        search: '',
+        category: '',
+        minDate: '',
+        maxDate: '',
+        minTime: '',
+        maxTime: '',
+        minPrice: 0,
+        maxPrice: 500,
+      });
+    };
+
   const handlePriceRangeChange = (value) => {
     setPriceRange(value);
-    handleFilterChange();
   };
 
   return (
@@ -40,7 +75,6 @@ function EventFilter({ onFilterChange }) {
           value={search}
           onChange={(e) => {
             setSearch(e.target.value);
-            handleFilterChange();
           }}
         />
       </div>
@@ -51,14 +85,13 @@ function EventFilter({ onFilterChange }) {
           value={category}
           onChange={(e) => {
             setCategory(e.target.value);
-            handleFilterChange();
           }}
         >
           <option value="">All Categories</option>
-          <option value="musical">Musical</option>
-          <option value="play">Play</option>
-          <option value="opera">Opera</option>
-          <option value="ballet">Ballet</option>
+          <option value="Musical">Musical</option>
+          <option value="Play">Play</option>
+          <option value="Opera">Opera</option>
+          <option value="Ballet">Ballet</option>
         </select>
       </div>
 
@@ -69,7 +102,6 @@ function EventFilter({ onFilterChange }) {
           value={minDate}
           onChange={(e) => {
             setMinDate(e.target.value);
-            handleFilterChange();
           }}
         />
       </div>
@@ -81,7 +113,6 @@ function EventFilter({ onFilterChange }) {
           value={maxDate}
           onChange={(e) => {
             setMaxDate(e.target.value);
-            handleFilterChange();
           }}
         />
       </div>
@@ -93,7 +124,6 @@ function EventFilter({ onFilterChange }) {
           value={minTime}
           onChange={(e) => {
             setMinTime(e.target.value);
-            handleFilterChange();
           }}
         />
       </div>
@@ -105,7 +135,6 @@ function EventFilter({ onFilterChange }) {
           value={maxTime}
           onChange={(e) => {
             setMaxTime(e.target.value);
-            handleFilterChange();
           }}
         />
       </div>
@@ -127,6 +156,12 @@ function EventFilter({ onFilterChange }) {
             railStyle={{ backgroundColor: 'gray', height: 10 }} // Rail color
           />
         </div>
+      </div>
+
+      {/* Search and Clear Buttons */}
+      <div className="filter-buttons">
+        <button onClick={handleSearchClick}>Search</button> {/* Search Button */}
+        <button onClick={handleClearFilters}>Clear</button> {/* Clear Button */}
       </div>
     </div>
   );

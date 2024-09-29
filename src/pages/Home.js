@@ -4,17 +4,22 @@ import EventFilter from '../components/EventFilter';
 import '../styles.css';
 
 function Home() {
-  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState([]);  // Original set of events
+  const [filteredEvents, setFilteredEvents] = useState([]);  // Filtered results
 
   // Fetch the events data from the public folder
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/events-mock-data.json`)
       .then((response) => response.json())
-      .then((data) => setFilteredEvents(data.events));
+      .then((data) => {
+        setAllEvents(data.events);  // Store all events
+        setFilteredEvents(data.events);  // Initialize filtered events with all events
+      });
   }, []);
 
   const handleFilterChange = (filters) => {
-    const filtered = filteredEvents.filter((event) => {
+    // Always apply filters to the full set of events (allEvents)
+    const filtered = allEvents.filter((event) => {
       const matchesSearch = event.eventName
         .toLowerCase()
         .includes(filters.search.toLowerCase());
@@ -52,7 +57,7 @@ function Home() {
       );
     });
 
-    setFilteredEvents(filtered);
+    setFilteredEvents(filtered);  // Update filtered events
   };
 
   const scrollDown = () => window.scrollTo(0, 500);
