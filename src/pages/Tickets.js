@@ -23,8 +23,7 @@ function Tickets() {
       orchestra: orchestraTickets,
       mainFloor: mainFloorTickets,
       balcony: balconyTickets
-        };
-
+    };
     const totalTickets = boxTickets + orchestraTickets + mainFloorTickets + balconyTickets 
 
     //check if total tickets selected is more than 0 
