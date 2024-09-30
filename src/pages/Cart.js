@@ -13,6 +13,8 @@ function Cart() {
       const parsedCart = JSON.parse(cartData);
       setCart(parsedCart);
 
+      
+
       // Calculate total price
       const ticketPrices = {
         box: 300.00,
@@ -29,6 +31,37 @@ function Cart() {
       setTotalPrice(total);
     }
   }, []);
+
+
+   // Function to calculate the total price
+   const calculateTotalPrice = (updatedCart) => {
+
+    // Calculate total price
+    const ticketPrices = {
+      box: 300.00,
+      orchestra: 200.00,
+      mainFloor: 150.00,
+      balcony: 100.00
+    };
+
+    
+    const total = (parsedCart.box * ticketPrices.box) +
+                  (parsedCart.orchestra * ticketPrices.orchestra) +
+                  (parsedCart.mainFloor * ticketPrices.mainFloor) +
+                  (parsedCart.balcony * ticketPrices.balcony);
+    setTotalPrice(total);
+  };
+
+  // Function to handle changes in ticket quantities
+  const handleTicketChange = (type, value) => {
+    const updatedCart = {
+      ...cart,
+      [type]: Number(value),
+    };
+    setCart(updatedCart);
+    calculateTotalPrice(updatedCart);  // Recalculate the total price
+    localStorage.setItem('cart', JSON.stringify(updatedCart));  // Update localStorage
+  };
 
   return (
     <div className="cart-page">
