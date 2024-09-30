@@ -24,6 +24,12 @@ function Tickets() {
       mainFloor: mainFloorTickets,
       balcony: balconyTickets
     };
+    const totalTickets = boxTickets + orchestraTickets + mainFloorTickets + balconyTickets 
+    //check if total tickets selected is more than 0 
+    if (totalTickets === 0){
+      alert("Please select one or more tickets to add tickets to the cart."); 
+    return; 
+    }
 
     localStorage.setItem('cart', JSON.stringify(cart));
     navigate('/cart');
