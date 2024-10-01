@@ -1,28 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
-import '../styles.css';
+import 'rc-slider/assets/index.css'; // Importing default rc-slider styles
+import '../styles.css'; // Assuming you have a custom stylesheet
 
-function EventFilter({ onFilterChange, category }) {
+function EventFilter({ onFilterChange }) {
   const [search, setSearch] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState(category || '');  // Default from props
+  const [category, setCategory] = useState('');
   const [minDate, setMinDate] = useState('');
   const [maxDate, setMaxDate] = useState('');
   const [minTime, setMinTime] = useState('');
   const [maxTime, setMaxTime] = useState('');
-  const [priceRange, setPriceRange] = useState([0, 500]);
-
-  useEffect(() => {
-    if (category) {
-      setSelectedCategory(category); // Set the category from the URL
-      handleSearchClick(); // Trigger the search when the category changes
-    }
-  }, [category]); // Run this effect whenever the category prop changes
+  const [priceRange, setPriceRange] = useState([0, 500]); // Min/Max price range
 
   const handleFilterChange = () => {
     const filters = {
       search,
-      category: selectedCategory,
+      category,
       minDate,
       maxDate,
       minTime,
@@ -30,23 +23,44 @@ function EventFilter({ onFilterChange, category }) {
       minPrice: priceRange[0],
       maxPrice: priceRange[1],
     };
-    if (onFilterChange) onFilterChange(filters);
+    onFilterChange(filters);
   };
 
-  const handleSearchClick = () => {
-    handleFilterChange();
-  };
+    // Function to trigger filtering when the Search button is clicked
+    const handleSearchClick = () => {
+      const filters = {
+        search,
+        category,
+        minDate,
+        maxDate,
+        minTime,
+        maxTime,
+        minPrice: priceRange[0],
+        maxPrice: priceRange[1],
+      };
+      onFilterChange(filters); // Pass the filters up to the parent component
+    };
 
-  const handleClearFilters = () => {
-    setSearch('');
-    setSelectedCategory('');
-    setMinDate('');
-    setMaxDate('');
-    setMinTime('');
-    setMaxTime('');
-    setPriceRange([0, 500]);
-    handleFilterChange();
-  };
+    // Function to reset all filters to their default values when Clear button is clicked
+    const handleClearFilters = () => {
+      setSearch('');
+      setCategory('');
+      setMinDate('');
+      setMaxDate('');
+      setMinTime('');
+      setMaxTime('');
+      setPriceRange([0, 500]);
+      onFilterChange({ // Send empty or default filters to parent
+        search: '',
+        category: '',
+        minDate: '',
+        maxDate: '',
+        minTime: '',
+        maxTime: '',
+        minPrice: 0,
+        maxPrice: 500,
+      });
+    };
 
   const handlePriceRangeChange = (value) => {
     setPriceRange(value);
@@ -59,15 +73,19 @@ function EventFilter({ onFilterChange, category }) {
         <input
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
         />
       </div>
-
+      
       <div className="filter-group">
         <label>Category</label>
         <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
+          value={category}
+          onChange={(e) => {
+            setCategory(e.target.value);
+          }}
         >
           <option value="">All Categories</option>
           <option value="Musical">Musical</option>
@@ -83,7 +101,9 @@ function EventFilter({ onFilterChange, category }) {
         <input
           type="date"
           value={minDate}
-          onChange={(e) => setMinDate(e.target.value)}
+          onChange={(e) => {
+            setMinDate(e.target.value);
+          }}
         />
       </div>
 
@@ -92,24 +112,57 @@ function EventFilter({ onFilterChange, category }) {
         <input
           type="date"
           value={maxDate}
-          onChange={(e) => setMaxDate(e.target.value)}
+          onChange={(e) => {
+            setMaxDate(e.target.value);
+          }}
+        />
+      </div>
+
+      <div className="filter-group">
+        <label>Min. Time</label>
+        <input
+          type="time"
+          value={minTime}
+          onChange={(e) => {
+            setMinTime(e.target.value);
+          }}
+        />
+      </div>
+
+      <div className="filter-group">
+        <label>Max. Time</label>
+        <input
+          type="time"
+          value={maxTime}
+          onChange={(e) => {
+            setMaxTime(e.target.value);
+          }}
         />
       </div>
 
       <div className="filter-group">
         <label>Price Range: ${priceRange[0]} - ${priceRange[1]}</label>
-        <Slider
-          range
-          min={0}
-          max={500}
-          value={priceRange}
-          onChange={handlePriceRangeChange}
-        />
+        <div className="price-slider">
+          <Slider
+            range
+            min={0}
+            max={500} // Adjust max price range here
+            value={priceRange}
+            onChange={handlePriceRangeChange}
+            trackStyle={[{ backgroundColor: 'black', height: 10 }]} // Track color
+            handleStyle={[
+              { borderColor: 'black', height: 20, width: 20, marginTop: -5 },
+              { borderColor: 'black', height: 20, width: 20, marginTop: -5 },
+            ]} // Handle color and size
+            railStyle={{ backgroundColor: 'gray', height: 10 }} // Rail color
+          />
+        </div>
       </div>
 
+      {/* Search and Clear Buttons */}
       <div className="filter-buttons">
-        <button onClick={handleSearchClick}>Search</button>
-        <button onClick={handleClearFilters}>Clear</button>
+        <button onClick={handleSearchClick}>Search</button> {/* Search Button */}
+        <button onClick={handleClearFilters}>Clear</button> {/* Clear Button */}
       </div>
     </div>
   );

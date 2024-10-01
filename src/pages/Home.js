@@ -23,13 +23,46 @@ function Home() {
       });
   }, [category]);  // Re-fetch when the category changes
 
+  //***ABOVE CODE NEEDS DEBUGGING FOR HEADER NAGIVATION BUTTONS TO EFFECTIVELY FILTER RESULTS*** -SOPHIA */
+
   const handleFilterChange = (filters) => {
+
     const filtered = allEvents.filter((event) => {
+      const matchesSearch = event.eventName
+        .toLowerCase()
+        .includes(filters.search.toLowerCase());
       const matchesCategory = filters.category
-        ? event.category.toLowerCase() === filters.category.toLowerCase()
+      ? event.category.toLowerCase() === filters.category.toLowerCase()
+      : true;
+      const matchesMinDate = filters.minDate
+        ? new Date(event.eventDetails[0].date) >= new Date(filters.minDate)
         : true;
-      // Other filter conditions (date, price, etc.) can be added here
-      return matchesCategory;
+      const matchesMaxDate = filters.maxDate
+        ? new Date(event.eventDetails[0].date) <= new Date(filters.maxDate)
+        : true;
+      const matchesMinTime = filters.minTime
+        ? event.eventDetails[0].time >= filters.minTime
+        : true;
+      const matchesMaxTime = filters.maxTime
+        ? event.eventDetails[0].time <= filters.maxTime
+        : true;
+      const matchesMinPrice = filters.minPrice
+        ? event.eventDetails[0].ticketPrices.box >= filters.minPrice
+        : true;
+      const matchesMaxPrice = filters.maxPrice
+        ? event.eventDetails[0].ticketPrices.box <= filters.maxPrice
+        : true;
+
+      return (
+        matchesSearch &&
+        matchesCategory &&
+        matchesMinDate &&
+        matchesMaxDate &&
+        matchesMinTime &&
+        matchesMaxTime &&
+        matchesMinPrice &&
+        matchesMaxPrice
+      );
     });
 
     setFilteredEvents(filtered);  // Update filtered events
