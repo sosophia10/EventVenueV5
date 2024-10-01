@@ -72,6 +72,9 @@ function Home() {
 
   return (
     <div>
+      {/* Background container */}
+      <div className="background-image"></div>
+      
       <div className="main-section">
         <h1>Welcome to the Event Venue</h1>
         <button onClick={scrollDown}>Get Your Tickets Now!</button>
