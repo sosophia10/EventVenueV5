@@ -78,7 +78,7 @@ function EventFilter({ onFilterChange }) {
           }}
         />
       </div>
-
+      
       <div className="filter-group">
         <label>Category</label>
         <select
@@ -92,6 +92,7 @@ function EventFilter({ onFilterChange }) {
           <option value="Play">Play</option>
           <option value="Opera">Opera</option>
           <option value="Ballet">Ballet</option>
+          <option value="Concert">Concert</option>
         </select>
       </div>
 

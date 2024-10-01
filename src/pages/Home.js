@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import EventCard from '../components/EventCard';
 import EventFilter from '../components/EventFilter';
 import '../styles.css';
+import { useParams } from 'react-router-dom';
 
 function Home() {
   const [allEvents, setAllEvents] = useState([]);  // Original set of events
   const [filteredEvents, setFilteredEvents] = useState([]);  // Filtered results
+  const { category } = useParams();  // Get category from URL
 
   // Fetch the events data from the public folder
   useEffect(() => {
@@ -13,19 +15,25 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         setAllEvents(data.events);  // Store all events
-        setFilteredEvents(data.events);  // Initialize filtered events with all events
+        if (category) {
+          handleFilterChange({ category });  // Trigger filtering for the category from URL
+        } else {
+          setFilteredEvents(data.events);  // Initialize filtered events with all events
+        }
       });
-  }, []);
+  }, [category]);  // Re-fetch when the category changes
+
+  //***ABOVE CODE NEEDS DEBUGGING FOR HEADER NAGIVATION BUTTONS TO EFFECTIVELY FILTER RESULTS*** -SOPHIA */
 
   const handleFilterChange = (filters) => {
-    // Always apply filters to the full set of events (allEvents)
+
     const filtered = allEvents.filter((event) => {
       const matchesSearch = event.eventName
         .toLowerCase()
         .includes(filters.search.toLowerCase());
       const matchesCategory = filters.category
-        ? event.category === filters.category
-        : true;
+      ? event.category.toLowerCase() === filters.category.toLowerCase()
+      : true;
       const matchesMinDate = filters.minDate
         ? new Date(event.eventDetails[0].date) >= new Date(filters.minDate)
         : true;
@@ -64,6 +72,9 @@ function Home() {
 
   return (
     <div>
+      {/* Background container */}
+      <div className="background-image"></div>
+      
       <div className="main-section">
         <h1>Welcome to the Event Venue</h1>
         <button onClick={scrollDown}>Get Your Tickets Now!</button>
