@@ -76,8 +76,7 @@ function Home() {
         <h1>Welcome to the Event Venue</h1>
         <button onClick={scrollDown}>Get Your Tickets Now!</button>
       </div>
-      {/* Pass the category from the URL to EventFilter */}
-      <EventFilter onFilterChange={handleFilterChange} category={category || ''} />
+      <EventFilter onFilterChange={handleFilterChange} />
       <div className="events-section">
         {filteredEvents.length > 0 ? (
           filteredEvents.map((event, index) => (

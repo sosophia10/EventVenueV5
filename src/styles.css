@@ -311,17 +311,12 @@ footer ul li a:hover {
 .button-group {
   display: flex;
   justify-content: flex-end;
-  /* Aligns buttons to the right */
   align-items: center;
   gap: 10px;
-  /* Space between buttons */
   position: absolute;
   right: 10px;
-  /* Positions the buttons on the right side of the card */
   bottom: 10px;
-  /* Ensures the buttons stay near the bottom */
   width: auto;
-  /* Ensure that buttons don't stretch */
 }
 
 /* Save icon button styles */
@@ -330,9 +325,9 @@ footer ul li a:hover {
   background: none;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
-  /* Ensure proper spacing between the buttons */
-  padding: 150px 10px;
+  top: -180px;
+  left: -30px;
+  position:absolute;
 }
 
 /* Unsaved state (black outline) */
