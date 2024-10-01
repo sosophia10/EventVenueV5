@@ -14,6 +14,11 @@ function EventCard({ event }) {
     }));
   };
 
+  const truncateDescription = (text, maxLength) => {
+    if (text.length <= maxLength) return text;
+    return text.slice(0, maxLength) + '...';
+  };
+
   return (
     <div className="row">
       {event.eventDetails.map((detail, index) => (
@@ -25,8 +30,10 @@ function EventCard({ event }) {
             </time>
           </section>
           <section className="card-cont">
-            <small>{event.category}</small>
+            <small>{event.category}</small> {/* Category is already displayed */}
             <h3>{event.eventName}</h3>
+            <p>{truncateDescription(event.description, 100)}</p>
+
             <div className="even-date">
               <i className="fa fa-calendar"></i>
               <time>

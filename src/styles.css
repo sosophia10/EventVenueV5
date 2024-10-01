@@ -154,6 +154,10 @@ footer ul li a:hover {
   padding: 20px;
 }
 
+.card-cont p {
+  font-size: 0.8em; /* Adjust this value to make the text smaller or larger */
+}
+
 .card {
   background-color: #fff;
   color: #333;
