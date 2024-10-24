@@ -1,4 +1,4 @@
-# Event-Venue-Ticket-Purchasing-React-Webapp
+# Event Venue Ticket Purchasing React-Webapp
 
 See deployed project [here](https://sosophia10.github.io/EventVenueV5).
 
