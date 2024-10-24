@@ -1,8 +1,6 @@
-<<<<<<< HEAD
-
 # Event-Venue-Ticket-Purchasing-React-Webapp
 
-See deployed project [here](https://sosophia10.github.io/Event-Venue-Ticket-Purchasing-React-Webapp).
+See deployed project [here](https://sosophia10.github.io/EventVenueV5).
 
 # Getting Started with Create React App
 
@@ -74,5 +72,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-7f09ec6 (Initialize project using Create React App)
-=======
